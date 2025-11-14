@@ -96,6 +96,6 @@ This will create the bundled files in the `lib` directory.
 
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
 
-This project was originally based on @rawgraphs/rawgraphs-charts, though the codebase has since undergone significant changes, especially in the chart modules. It continues to use @rawgraphs/rawgraphs-core and the original bundler.
+This project was originally forked from @rawgraphs/rawgraphs-charts (commit SHA: a6c5d4b7ba90117fdd13c558c9746af7ba175f42) on Jun 30, 2022, though the codebase has since undergone significant changes, especially in the chart modules. It continues to use @rawgraphs/rawgraphs-core and the original bundler.
 
 See the [NOTICE](NOTICE.txt) file for attribution to the RAWGraphs project.
