@@ -12,7 +12,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const results = [];
 
   // compute the rollup for each couple of steps
-  // @TODO move this as grouping function
   mapping.steps.value.slice(0, -1).forEach((step1, index) => {
     //get the second step
     const step2 = mapping.steps.value[index + 1];

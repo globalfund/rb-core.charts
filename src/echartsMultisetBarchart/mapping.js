@@ -15,7 +15,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const result = rollups(
     data,
     (v) => {
-      // @TODO use the spread operator to creat groups on mapping values
       // for every dimension in the bars field, create an item
       mapping.sizes.value.forEach((sizeName, i) => {
         //getting values for aggregation
