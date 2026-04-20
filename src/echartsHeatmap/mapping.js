@@ -7,22 +7,12 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     "size",
     mapping,
     dataTypes,
-    dimensions
+    dimensions,
   );
   // add the non-compulsory dimensions.
   "size" in mapping ? null : (mapping.size = { value: undefined });
 
   let results = [];
-
-  data.forEach((d) => {
-    const item = {
-      x: d[mapping.x.value],
-      y: d[mapping.y.value],
-      size: mapping.size.value ? d[mapping.size.value] : data.length,
-    };
-
-    results.push(item);
-  });
 
   rollups(
     data,
@@ -38,7 +28,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       return item;
     },
     (d) => d[mapping.x.value].toString(), // x grouping. toString() to enable grouping on dates
-    (d) => d[mapping.y.value].toString() // y grouping. toString() to enable grouping on dates
+    (d) => d[mapping.y.value].toString(), // y grouping. toString() to enable grouping on dates
   );
 
   return results;
