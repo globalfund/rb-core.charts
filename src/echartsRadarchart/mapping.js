@@ -20,24 +20,23 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
         ? v[0][mapping.category.value]
         : "All"; // Getting the first one since it's grouped
       categories.push(category);
-      return v.map((d) => {
-        let item = {
-          value: mapping.dimensions.value.map((axisName) => {
-            indicatorDict[axisName] = Math.max(
-              indicatorDict[axisName],
-              d[axisName]
-            );
-            return d[axisName];
-          }),
-          name: category,
-        };
-        results.push(item);
 
-        return "done";
-      });
+      let item = {
+        value: mapping.dimensions.value.map((axisName) => {
+          const sum = v.reduce((acc, d) => acc + d[axisName], 0);
+          indicatorDict[axisName] = Math.max(indicatorDict[axisName], sum);
+          return sum;
+        }),
+        name: category,
+      };
+      results.push(item);
+
+      return "done";
     },
     (d) =>
-      mapping.category.value ? d[mapping.category.value]?.toString() : undefined // category grouping. toString() to enable grouping on dates
+      mapping.category.value
+        ? d[mapping.category.value]?.toString()
+        : undefined, // category grouping. toString() to enable grouping on dates
   );
 
   const indicators = Object.keys(indicatorDict).map((i) => ({
