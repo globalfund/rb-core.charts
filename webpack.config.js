@@ -48,11 +48,11 @@ module.exports = {
       },
       {
         test: /\.tsv$/,
-        use: ['dsv-loader?delimiter=\t'],
+        use: [{ loader: path.resolve('./bundler/dsvLoader.js'), options: { delimiter: '\t' } }],
       },
       {
         test: /\.csv$/,
-        use: ['dsv-loader?delimiter=,'],
+        use: [{ loader: path.resolve('./bundler/dsvLoader.js'), options: { delimiter: ',' } }],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
