@@ -7,6 +7,7 @@ export { default as echartsCirclepacking } from "./echartsCirclepacking";
 export { default as echartsCirculargraph } from "./echartsCirculargraph";
 export { default as echartsForcegraph } from "./echartsForcegraph";
 export { default as echartsGeomap } from "./echartsGeomap";
+export { default as echartsGraphgl } from "./echartsGraphgl";
 export { default as echartsHeatmap } from "./echartsHeatmap";
 export { default as echartsLinechart } from "./echartsLinechart";
 export { default as echartsMultisetBarchart } from "./echartsMultisetBarchart";
