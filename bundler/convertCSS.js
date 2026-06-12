@@ -1,4 +1,4 @@
-import parse from "css/lib/parse";
+import parse from "css/lib/parse/index.js";
 
 function formatSelectorName(selector) {
   return selector.replace(/#|\./g, "");

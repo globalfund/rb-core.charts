@@ -1,11 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import preval from 'babel-plugin-preval/macro'
 
-const configurations = preval`
-  const fs = require('fs');
-  module.exports = fs.readdirSync(__dirname + '/../configurations').filter(item => item[0] !== '.');
-`
+const configModules = import.meta.glob('../configurations/*.js')
+const configurations = Object.keys(configModules).map(k => k.split('/').pop())
 
 const ChartList = ({ props }) => {
   return (
