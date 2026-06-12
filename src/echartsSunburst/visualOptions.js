@@ -1,5 +1,3 @@
-import { max, min } from "d3";
-
 export const visualOptions = {
   centerX: {
     type: "number",
