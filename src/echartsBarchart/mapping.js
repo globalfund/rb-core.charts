@@ -1,4 +1,4 @@
-import { rollups } from "d3";
+import * as d3 from "d3";
 import { getDimensionAggregator } from "@rawgraphs/rawgraphs-core";
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
@@ -7,29 +7,35 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     "size",
     mapping,
     dataTypes,
-    dimensions
+    dimensions,
   );
 
   // add the non-compulsory dimensions.
-  "series" in mapping ? null : (mapping.series = { value: undefined });
   "size" in mapping ? null : (mapping.size = { value: undefined });
+  "breakdown" in mapping ? null : (mapping.breakdown = { value: undefined });
 
   let results = [];
 
-  rollups(
+  const xAxisValues = [
+    ...new Set(data.map((d) => d[mapping.bars.value].toString())),
+  ];
+
+  const breakDownGroups = d3.rollup(
     data,
-    (v) => {
-      const item = {
-        bars: v[0][mapping.bars.value], // get the first one since it's grouped
-        size: mapping.size.value
-          ? sizeAggregator(v.map((d) => d[mapping.size.value]))
-          : v.length, // aggregate. If not mapped, give 1 as size
-      };
-      results.push(item);
-      return item;
-    },
-    (d) => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
+    (v) => v.reduce((acc, curr) => acc + (curr[mapping.size.value] || 1), 0),
+    (d) => d[mapping.breakdown.value]?.toString(), // stacks grouping. toString() to enable grouping on dates
+    (d) => d[mapping.bars.value].toString(),
   );
 
-  return results;
+  breakDownGroups.forEach((value, key) => {
+    results.push({
+      name: key ?? "All",
+      values: xAxisValues.map((bar) => value.get(bar) || 0),
+    });
+  });
+
+  return {
+    xAxisValues: xAxisValues,
+    series: results,
+  };
 };
