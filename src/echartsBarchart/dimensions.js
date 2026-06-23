@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: "bars",
-    name: "Bars",
+    name: "Category",
     validTypes: ["number", "string", "date"],
     required: true,
     operation: "get",
@@ -10,13 +10,21 @@ export const dimensions = [
   },
   {
     id: "size",
-    name: "Size",
+    name: "Value",
     operation: "get",
     validTypes: ["number"],
-    required: false,
+    required: true,
     aggregation: true,
     aggregationDefault: "sum",
     description:
       "The values corresponding to each category that determine the height or length of the column.",
+  },
+  {
+    id: "breakdown",
+    name: "Breakdown",
+    operation: "get",
+    validTypes: ["number", "string", "date"],
+    required: false,
+    description: "Group or stack bars by another category.",
   },
 ];
