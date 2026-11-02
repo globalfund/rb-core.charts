@@ -14,7 +14,8 @@
     "format": "prettier --write src",
     "sandbox": "vite",
     "prebuild": "rimraf lib",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepare": "npm run build"
   },
   "author": "",
   "license": "Apache-2.0",
